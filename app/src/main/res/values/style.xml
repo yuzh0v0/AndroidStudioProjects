@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="selfStyle" parent="Base.Widget.MaterialComponents.Chip">
+<!--        <item name="android:checkable">true</item>-->
+<!--        <item name="chipIconVisible">true</item>-->
+<!--        <item name="checkedIconVisible">true</item>-->
+<!--        <item name="closeIconVisible">true</item>-->
+
+        <item name="checkedIcon">@drawable/ic_mtrl_chip_checked_black</item>
+        <item name="android:textColor">@color/mtrl_choice_chip_text_color</item>
+        <item name="chipBackgroundColor">@color/mtrl_choice_chip_background_color</item>
+        <item name="rippleColor">@color/mtrl_choice_chip_ripple_color</item>
+
+    </style>
+
+    <style name="insidebtn">
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="color">@color/pale_turquoise</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:background">@drawable/border_line_while</item>
+    </style>
+</resources>

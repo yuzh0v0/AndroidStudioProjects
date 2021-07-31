@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">MY CALCULATOR</string>
+
+    <string name="head_text">Calculator</string>
+    <string name="formula">计算式</string>
+    <string name="result">结果</string>
+    <string name="calculate_symbol" />
+    <string name="initial_input">请输入————</string>
+
+    <string name="table_head_title">测试用例统计</string>
+    <string name="table_title_case_count">用例数</string>
+    <string name="table_title_pass_rate">通过率</string>
+    <string name="table_content_1" />
+    <string name="table_content_2" />
+
+    <string name="sample_add">添加单个测试用例</string>
+    <string name="batch_import_samples">批量导入用例</string>
+    <string name="export_samples">导出测试用例</string>
+    <string name="start_testing">开始测试</string>
+    <string name="table_clean">清除表单</string>
+    <string name="single_test_input_title">表达式：</string>
+    <string name="single_test_input" />
+    <string name="single_test_result_title">期待值:</string>
+    <string name="single_test_result" />
+    <string name="single_test_output_title">输出:</string>
+    <string name="single_test_output" />
+
+
+    <string name="button_num_1">1</string>
+    <string name="button_num_2">2</string>
+    <string name="button_num_3">3</string>
+    <string name="button_num_4">4</string>
+    <string name="button_num_5">5</string>
+    <string name="button_num_6">6</string>
+    <string name="button_num_7">7</string>
+    <string name="button_num_8">8</string>
+    <string name="button_num_9">9</string>
+    <string name="button_num_0">0</string>
+    <string name="button_add">+</string>
+    <string name="button_multi">*</string>
+    <string name="button_bracket_l">(</string>
+    <string name="button_del">&#060&#045</string>
+    <string name="button_clr">C</string>
+    <string name="button_sub">-</string>
+    <string name="button_div">/</string>
+    <string name="button_bracket_r">)</string>
+    <string name="button_point">.</string>
+    <string name="button_equal">=</string>
+
+
+    <string name="chip_nav_pg1">main</string>
+    <string name="chip_nav_pg2">test</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="formula_add_sug">请输入不带\'=\'的算式</string>
+
+</resources>
