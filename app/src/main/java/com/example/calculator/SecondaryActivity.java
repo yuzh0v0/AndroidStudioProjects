@@ -1,18 +1,16 @@
 package com.example.calculator;
 
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
-import android.content.ContentUris;
-import android.content.Context;
+
 import android.content.Intent;
-import android.database.Cursor;
+
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
+
 import android.util.Log;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,13 +19,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.litepal.LitePal;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,7 +31,10 @@ import java.util.List;
 import static java.lang.Math.abs;
 
 
-public class SecodMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class SecondaryActivity extends AppCompatActivity implements View.OnClickListener {
+
+    SecondaryActivitySupport SASupport = new SecondaryActivitySupport();
+    private long mExitTime = 0;
     String path;
     TextView tv;
     double case_count = 0;
@@ -52,8 +48,8 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
     private TextView View_case_count,View_pass_rate;
     private EditText formula_add_edit;
     private EditText expect_value_edit ;
-    private long mExitTime = 0;
     public String formula_add , expect_value , single_result;
+
     public String[] datastore={"","","","","","","","","","","","","","","","","",
             "","","","","","","","", "","","","","","","","","","","","","","","",
             "", "", "","","","","","","","","","","","","","","","","","","","",""};
@@ -64,7 +60,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secod_main);
+        setContentView(R.layout.activity_secondary);
 
         caselistView = findViewById(R.id.list_view);
         Button chip_topg1 = findViewById(R.id.chip_topg1);
@@ -87,7 +83,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         btn_start_testing.setOnClickListener(this);
         btn_table_clean.setOnClickListener(this);
 
-        ArrayAdapter<String> adapter_init = new ArrayAdapter<>(SecodMainActivity.this,
+        ArrayAdapter<String> adapter_init = new ArrayAdapter<>(SecondaryActivity.this,
                 android.R.layout.simple_expandable_list_item_1,
                 datastore);
         caselistView.setAdapter(adapter_init);
@@ -95,15 +91,12 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         LitePal.getDatabase();
     }
 
-
-
-    @SuppressLint("NonConstantResourceId")
     @Override
     public   void  onClick(View v){
         switch (v.getId()) {
             //nav to page1
             case R.id.chip_topg1:
-                Intent intent_nav = new Intent(SecodMainActivity.this, MainActivity.class);
+                Intent intent_nav = new Intent(SecondaryActivity.this, MainActivity.class);
                 startActivity(intent_nav);
                 finish();
                 break;
@@ -112,9 +105,9 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
             case R.id.btn_addsingletest:
                 TestCase testdome_add = new TestCase();
                 formula_add=formula_add_edit.getText().toString();
-                Toast.makeText(SecodMainActivity.this, formula_add,Toast.LENGTH_SHORT).show();
+                Toast.makeText(SecondaryActivity.this, formula_add,Toast.LENGTH_SHORT).show();
                 expect_value=expect_value_edit.getText().toString();
-                Toast.makeText(SecodMainActivity.this, expect_value,Toast.LENGTH_SHORT).show();
+                Toast.makeText(SecondaryActivity.this, expect_value,Toast.LENGTH_SHORT).show();
 
                 if(formula_add.equals("")||expect_value.equals("")){
                     break;
@@ -145,7 +138,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         Log.d("import", String.valueOf(listsize));
                     }
                 }while (listsize<dbsize) ;
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(SecodMainActivity.this,
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1,
                         datastore);
                 caselistView.setAdapter(adapter);
@@ -200,7 +193,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
 //                            Log.d("import", String.valueOf(listsize_add));
                         }
                     } while (listsize_add < dbsize_add);
-                    ArrayAdapter<String> adapter_add = new ArrayAdapter<>(SecodMainActivity.this,
+                    ArrayAdapter<String> adapter_add = new ArrayAdapter<>(SecondaryActivity.this,
                             android.R.layout.simple_expandable_list_item_1,
                             datastore);
                     caselistView.setAdapter(adapter_add);
@@ -218,8 +211,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
 
                 break;
 
-            //导出测试完的用例到设备
-            case R.id.btn_export_cases:
+            case R.id.btn_export_cases: // export testcases
                 try {
                     List<TestCase>  setlistview_exp = LitePal.findAll(TestCase.class);
                     order_list = new ArrayList<>();
@@ -229,21 +221,20 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         order_list.add(order);
                     }
                     Log.d("export", "start export");
-                    FileExport.writeToExcel(SecodMainActivity.this,order_list,"orderTest");
+                    FileExport.writeToExcel(SecondaryActivity.this,order_list,"orderTest");
                     Log.d("export", "end export");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
 
-            //start test
-            case R.id.btn_start_testing:
+            case R.id.btn_start_testing: //start test
                 //clear listview array
                 while( storenum <= 50) {
                     datastore[storenum]=datastoreclear[storenum];
                     storenum++;
                 }
-                ArrayAdapter<String> adapter_clear = new ArrayAdapter<>(SecodMainActivity.this,
+                ArrayAdapter<String> adapter_clear = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1, datastore);
                 caselistView.setAdapter(adapter_clear);
                 Toast.makeText(this, "开始用例批量测试", Toast.LENGTH_SHORT).show();
@@ -268,7 +259,6 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                     }
                     testtoupdate.updateAll("id=?",String.valueOf(items.getId()));
                 }
-                //read from database
                 List<TestCase>  setlistview_result = LitePal.findAll(TestCase.class);
                 int listsize_add=0;
                 int dbsize_add=setlistview_result.size();
@@ -281,7 +271,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         Log.d("import", String.valueOf(listsize_add));
                     }
                 } while (listsize_add < dbsize_add);
-                ArrayAdapter<String> adapter_result = new ArrayAdapter<>(SecodMainActivity.this,
+                ArrayAdapter<String> adapter_result = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1, datastore);
                 caselistView.setAdapter(adapter_result);
                 View_case_count.setText(String.valueOf((int)case_count));
@@ -293,15 +283,15 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         View_pass_rate.setText("0.0%");
                     }
                 break;
-            //clear listview
-            case R.id.btn_table_clean:
+
+            case R.id.btn_table_clean: // clear listview
                 LitePal.deleteAll(TestCase.class);
                 storenum = 0;
                 while( storenum <= 50) {
                     datastore[storenum]=datastoreclear[storenum];
                     storenum++;
                 }
-                ArrayAdapter<String> adapter_import = new ArrayAdapter<>(SecodMainActivity.this,
+                ArrayAdapter<String> adapter_import = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1,
                         datastore);
                 caselistView.setAdapter(adapter_import);
@@ -325,119 +315,17 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                 return;
             }
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-                path = getPath(this, uri);
+                path = SASupport.getPath(this, uri);
                 tv.setText(path);
                 Toast.makeText(this, path, Toast.LENGTH_SHORT).show();
             } else {
-                path = getRealPathFromURI(uri);
+                path = SASupport.getRealPathFromURI(uri);
                 tv.setText(path);
-                Toast.makeText(SecodMainActivity.this, path + "222222", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SecondaryActivity.this, path + "2", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public String getRealPathFromURI(Uri contentUri) {
-        String res = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if(null!=cursor&&cursor.moveToFirst()){
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-            cursor.close();
-        }
-        return res;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String getPath(final Context context, final Uri uri) {
-
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
-        // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-            // ExternalStorageProvider
-            if (isExternalStorageDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
-                final String[] split = docId.split(":");
-                final String type = split[0];
-
-                if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1];
-                }
-            }
-            // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
-
-                final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.parseLong(id));
-
-                return getDataColumn(context, contentUri, null, null);
-            }
-            // MediaProvider
-            else if (isMediaDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
-                final String[] split = docId.split(":");
-                final String type = split[0];
-
-                Uri contentUri = null;
-                if ("image".equals(type)) {
-                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                } else if ("video".equals(type)) {
-                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                } else if ("audio".equals(type)) {
-                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                }
-
-                final String selection = "_id=?";
-                final String[] selectionArgs = new String[]{split[1]};
-
-                return getDataColumn(context, contentUri, selection, selectionArgs);
-            }
-        }
-        // MediaStore (and general)
-        else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            return getDataColumn(context, uri, null, null);
-        }
-        // File
-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
-        }
-        return null;
-    }
-
-    public String getDataColumn(@NonNull Context context, Uri uri, String selection,
-                                String[] selectionArgs) {
-
-        Cursor cursor = null;
-        final String column = "_data";
-        final String[] projection = {column};
-
-        try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
-                    null);
-            if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        return null;
-    }
-
-    public boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
-    }
-
-    public boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
-    }
-
-    public boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
-    }
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode == KeyEvent.KEYCODE_BACK){
             if((System.currentTimeMillis() - mExitTime)>2000){
@@ -450,5 +338,6 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         }
         return  super.onKeyDown(keyCode,event);
     }
+
 }
 

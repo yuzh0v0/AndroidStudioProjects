@@ -9,10 +9,9 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Support extends AppCompatActivity {
+public class MainActivitySupport extends AppCompatActivity {
     
     private final String init_String= "";
-    private long mExitTime = 0;
 
     //judge last input whether is operator + -
     public boolean checkaddsub(String str){
@@ -171,19 +170,5 @@ public class Support extends AppCompatActivity {
         setOperandlist.add(str_show);
         setOperandlist.add(warnInfo);
         return setOperandlist;
-    }
-
-    //exit app delay
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if((System.currentTimeMillis() - mExitTime)>2000){
-                Toast.makeText(this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
-                mExitTime =System.currentTimeMillis();
-            }else {
-                finish();
-            }
-            return true;
-        }
-        return  super.onKeyDown(keyCode,event);
     }
 }

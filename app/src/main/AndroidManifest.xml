@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CAL2">
-        <activity android:name="com.example.calculator.SecodMainActivity"></activity>
+        <activity android:name="com.example.calculator.SecondaryActivity"></activity>
         <activity android:name="com.example.calculator.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

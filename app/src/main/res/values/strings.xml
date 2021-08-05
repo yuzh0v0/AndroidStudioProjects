@@ -12,8 +12,8 @@
     <string name="table_content_1" />
     <string name="table_content_2" />
 
-    <string name="sample_add">添加单个测试用例</string>
-    <string name="batch_import_samples">批量导入测试用例</string>
+    <string name="sample_add">添加单个&#10;测试用例</string>
+    <string name="batch_import_samples">导入设备测试用例</string>
     <string name="export_samples">批量导出测试用例</string>
     <string name="start_testing">开始测试</string>
     <string name="table_clean">清空数据库</string>
@@ -49,5 +49,6 @@
     <string name="chip_nav_pg2">test</string>
 
     <string name="formula_add_sug">请输入不带\'=\'的算式</string>
+    <string name="default_cases">导入默认测试用例</string>
 
 </resources>
