@@ -24,12 +24,12 @@ import jxl.write.WriteException;
 public class FileExport {
 
     public static void writeToExcel(Context context, List<Order> orders, String fileName) throws Exception {
-        //sd卡是否可用
+        //judge sdcard availability
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) && getAvailableStorage(context) > 1000000) {
             Toast.makeText(context, "SD卡不可用！", Toast.LENGTH_SHORT).show();
             return;
         }
-        String[] title = {"ID", "FORMULA", "EXPECT_VALUE", "RESULT","ISPASS"};//表头
+        String[] title = {"ID", "FORMULA", "EXPECT_VALUE", "RESULT","ISPASS"};
         File file;
         File dir = new File(context.getExternalFilesDir(null).getPath());
         if (!dir.exists()) {
@@ -38,22 +38,18 @@ public class FileExport {
                 Toast.makeText(context, "无法生成文件", Toast.LENGTH_SHORT).show();
             }
         }
-        //创建文件
+        //create file
         file = new File(dir, fileName + ".xls");
-        //创建Excel表
+        //create Excel
         WritableWorkbook wwb;
         OutputStream os = new FileOutputStream(file);
         wwb = Workbook.createWorkbook(os);
-        //创建第一个表并设置第一格名字
-        WritableSheet sheet = wwb.createSheet("测试结果", 0);//表名
-        //第一行头部
-        Label label;//(头部4列)
+        WritableSheet sheet = wwb.createSheet("测试结果", 0);
+        Label label;
         for (int i = 0; i < title.length; i++) {
-            //每一格是以二维数组的形式存在（列,行）（0,0； 1,0 ；2,0 ；3,0）
-            label = new Label(i, 0, title[i], getHeader());//一个单元格;
-            sheet.addCell(label);//将单元格加入表中
+            label = new Label(i, 0, title[i], getHeader());
+            sheet.addCell(label);
         }
-        //具体数据
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
             Label exp_id = new Label(0, i + 1, order.getExp_index());
@@ -67,48 +63,39 @@ public class FileExport {
             sheet.addCell(exp_res);
             sheet.addCell(exp_isp);
         }
-        wwb.write();//写入数据
+        wwb.write();
         wwb.close();
         Toast.makeText(context, "完成导出测试用例", Toast.LENGTH_SHORT).show();
 
     }
 
-    /**
-     * 表格样式
-     */
     public static WritableCellFormat getHeader() {
-        //参数1：字体大小， 2：18，3：粗体，4：斜体
         WritableFont font = new WritableFont(WritableFont.TIMES, 10,
-                WritableFont.BOLD, true);// 定义字体
+                WritableFont.BOLD, true);
         try {
-            font.setColour(Colour.PINK);// 蓝色字体
+            font.setColour(Colour.PINK);
         } catch (WriteException e1) {
             e1.printStackTrace();
         }
-        //单元格样式
         WritableCellFormat format = new WritableCellFormat(font);
         try {
-            format.setAlignment(jxl.format.Alignment.CENTRE);// 左右居中
-            format.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);// 上下居中
+            format.setAlignment(jxl.format.Alignment.CENTRE);
+            format.setVerticalAlignment(jxl.format.VerticalAlignment.CENTRE);
             format.setBorder(Border.ALL, BorderLineStyle.THIN,
-                    Colour.BLACK);// 黑色边框
-            format.setBackground(Colour.YELLOW);// 黄色背景
+                    Colour.BLACK);
+            format.setBackground(Colour.YELLOW);
         } catch (WriteException e) {
             e.printStackTrace();
         }
         return format;
     }
 
-    /**
-     * 获取SD卡可用容量
-     */
     private static long getAvailableStorage(Context context) {
         String root = context.getExternalFilesDir(null).getPath();
-        //获取磁盘使用情况
+        //find disk usage
         StatFs statFs = new StatFs(root);
         long blockSize = statFs.getBlockSize();
         long availableBlocks = statFs.getAvailableBlocks();
-        // Formatter.formatFileSize(context, availableSize);
         return blockSize * availableBlocks;
     }
 

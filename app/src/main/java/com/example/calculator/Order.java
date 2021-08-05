@@ -55,5 +55,4 @@ public class Order {
         this.exp_ispass = exp_ispass;
     }
 
-
 }

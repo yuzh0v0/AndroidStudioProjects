@@ -7,15 +7,14 @@
 #define  LOG_TAG    "CPP_LOG"
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 //  transform jstring into string
 string jstringTostring(JNIEnv* env, jstring jstr) {
-    char *rtn = NULL;
+    char *rtn = nullptr;
     jclass clsstring = env->FindClass("java/lang/String");
     jstring strencode = env->NewStringUTF("GB2312");
     jmethodID mid = env->GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-    jbyteArray barr = (jbyteArray) env->CallObjectMethod(jstr, mid, strencode);
+    auto barr = (jbyteArray) env->CallObjectMethod(jstr, mid, strencode);
     jsize alen = env->GetArrayLength(barr);
     jbyte *ba = env->GetByteArrayElements(barr, JNI_FALSE);
     if (alen > 0) {
@@ -31,23 +30,19 @@ string jstringTostring(JNIEnv* env, jstring jstr) {
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_example_calculator_JNI_callcalcu(JNIEnv *env, jobject thiz, jstring mystr) {
-    const char *s = env->GetStringUTFChars(mystr, 0);
-
-    string inputstring = jstringTostring(env, mystr);
-//    string inputstring = "(6*(0-7)/3-2)/8+4.2*5-18.2";
-
-    LOGI("%s", s);
-    const int len = inputstring.length();
+Java_com_example_calculator_JNI_callCalcu(JNIEnv *env, jobject thiz, jstring inputStr) {
+    string inputString = jstringTostring(env, inputStr);
+    const int len = inputString.length();
     char* input ;
     input = new char[len+1];
-    strcpy(input,inputstring.c_str());
+    strcpy(input, inputString.c_str());
 
-    //Call C++ Algorithm
+    // call C++ algorithm
     FourArithmeticOP cal;
     string ispass = cal.InorderToPost(input);
+    free(input);
 
-    //Judge input then output
+    // settle output
     const char* output;
     if(ispass=="pass"){
         string temp_output = cal.Calculate();
@@ -57,11 +52,5 @@ Java_com_example_calculator_JNI_callcalcu(JNIEnv *env, jobject thiz, jstring mys
         output = ispass.c_str();
         LOGI("%s", output);
     }
-
-//    char buffer [100];
-//    char *output = buffer;
-//    string tempoutput = cal.Calculate();
-//    const char* output = tempoutput.c_str();
-
     return env->NewStringUTF(output);
 }

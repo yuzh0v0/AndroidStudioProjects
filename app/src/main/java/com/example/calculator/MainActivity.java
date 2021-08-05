@@ -30,44 +30,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView inputText,symbolView,inputTextView,resultView;
 
 
-//    private FragmentManager fManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        inputText =(TextView)findViewById(R.id.initialinput);
-        symbolView =(TextView)findViewById(R.id.symbolView);
-        inputTextView =(TextView)findViewById(R.id.inputTextView);
-        resultView =(TextView)findViewById(R.id.resultView);
+        inputText = findViewById(R.id.initialinput);
+        symbolView = findViewById(R.id.symbolView);
+        inputTextView = findViewById(R.id.inputTextView);
+        resultView = findViewById(R.id.resultView);
 
-
-
-        Button chip_totest = (Button) findViewById(R.id.chip_topg2);
-        Button button_num_1 = (Button) findViewById(R.id.button_1);
-        Button button_num_2 = (Button) findViewById(R.id.button_2);
-        Button button_num_3 = (Button) findViewById(R.id.button_3);
-        Button button_num_4 = (Button) findViewById(R.id.button_4);
-        Button button_num_5 = (Button) findViewById(R.id.button_5);
-        Button button_num_6 = (Button) findViewById(R.id.button_6);
-        Button button_num_7 = (Button) findViewById(R.id.button_7);
-        Button button_num_8 = (Button) findViewById(R.id.button_8);
-        Button button_num_9 = (Button) findViewById(R.id.button_9);
-        Button button_num_0 = (Button) findViewById(R.id.button_10);
-        Button button_add = (Button) findViewById(R.id.button_11);
-        Button button_multi = (Button) findViewById(R.id.button_12);
-        Button button_bracket_l = (Button) findViewById(R.id.button_13);
-        Button button_del = (Button) findViewById(R.id.button_14);
-        Button button_clr = (Button) findViewById(R.id.button_15);
-        Button button_sub = (Button) findViewById(R.id.button_16);
-        Button button_div = (Button) findViewById(R.id.button_17);
-        Button button_bracket_r = (Button) findViewById(R.id.button_18);
-        Button button_point = (Button) findViewById(R.id.button_19);
-        Button button_equal = (Button) findViewById(R.id.button_20);
+        Button chip_totest = findViewById(R.id.chip_topg2);
+        Button button_num_1 = findViewById(R.id.button_1);
+        Button button_num_2 = findViewById(R.id.button_2);
+        Button button_num_3 = findViewById(R.id.button_3);
+        Button button_num_4 = findViewById(R.id.button_4);
+        Button button_num_5 = findViewById(R.id.button_5);
+        Button button_num_6 = findViewById(R.id.button_6);
+        Button button_num_7 = findViewById(R.id.button_7);
+        Button button_num_8 = findViewById(R.id.button_8);
+        Button button_num_9 = findViewById(R.id.button_9);
+        Button button_num_0 = findViewById(R.id.button_10);
+        Button button_add = findViewById(R.id.button_11);
+        Button button_multi = findViewById(R.id.button_12);
+        Button button_bracket_l = findViewById(R.id.button_13);
+        Button button_del = findViewById(R.id.button_14);
+        Button button_clr = findViewById(R.id.button_15);
+        Button button_sub = findViewById(R.id.button_16);
+        Button button_div = findViewById(R.id.button_17);
+        Button button_bracket_r = findViewById(R.id.button_18);
+        Button button_point = findViewById(R.id.button_19);
+        Button button_equal = findViewById(R.id.button_20);
 
         button_num_1.setOnClickListener(this);
         button_num_2.setOnClickListener(this);
@@ -106,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (v.getId()){
                 //1
                 case R.id.button_1:
-                    ArrayList<String> objectnum_1 = setNumber(InputString, "1", real_input, warning_info);
+                    ArrayList<String> objectnum_1 = setOperand(InputString, "1", real_input, warning_info);
                     real_input = objectnum_1.get(0);
                     InputString = objectnum_1.get(1);
                     warning_info = objectnum_1.get(2);
@@ -115,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //2
                 case R.id.button_2:
-                    ArrayList<String> objectnum_2 = setNumber(InputString, "2", real_input, warning_info);
+                    ArrayList<String> objectnum_2 = setOperand(InputString, "2", real_input, warning_info);
                     real_input = objectnum_2.get(0);
                     InputString = objectnum_2.get(1);
                     warning_info = objectnum_2.get(2);
@@ -124,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //3
                 case R.id.button_3:
-                    ArrayList<String> objectnum_3 = setNumber(InputString, "3", real_input, warning_info);
+                    ArrayList<String> objectnum_3 = setOperand(InputString, "3", real_input, warning_info);
                     real_input = objectnum_3.get(0);
                     InputString = objectnum_3.get(1);
                     warning_info = objectnum_3.get(2);
@@ -133,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //4
                 case R.id.button_4:
-                    ArrayList<String> objectnum_4 = setNumber(InputString, "4", real_input, warning_info);
+                    ArrayList<String> objectnum_4 = setOperand(InputString, "4", real_input, warning_info);
                     real_input = objectnum_4.get(0);
                     InputString = objectnum_4.get(1);
                     warning_info = objectnum_4.get(2);
@@ -142,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //5
                 case R.id.button_5:
-                    ArrayList<String> objectnum_5 = setNumber(InputString, "5", real_input, warning_info);
+                    ArrayList<String> objectnum_5 = setOperand(InputString, "5", real_input, warning_info);
                     real_input = objectnum_5.get(0);
                     InputString = objectnum_5.get(1);
                     warning_info = objectnum_5.get(2);
@@ -151,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //6
                 case R.id.button_6:
-                    ArrayList<String> objectnum_6 = setNumber(InputString, "6", real_input, warning_info);
+                    ArrayList<String> objectnum_6 = setOperand(InputString, "6", real_input, warning_info);
                     real_input = objectnum_6.get(0);
                     InputString = objectnum_6.get(1);
                     warning_info = objectnum_6.get(2);
@@ -160,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //7
                 case R.id.button_7:
-                    ArrayList<String> objectnum_7 = setNumber(InputString, "7", real_input, warning_info);
+                    ArrayList<String> objectnum_7 = setOperand(InputString, "7", real_input, warning_info);
                     real_input = objectnum_7.get(0);
                     InputString = objectnum_7.get(1);
                     warning_info = objectnum_7.get(2);
@@ -169,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //8
                 case R.id.button_8:
-                    ArrayList<String> objectnum_8 = setNumber(InputString, "8", real_input, warning_info);
+                    ArrayList<String> objectnum_8 = setOperand(InputString, "8", real_input, warning_info);
                     real_input = objectnum_8.get(0);
                     InputString = objectnum_8.get(1);
                     warning_info = objectnum_8.get(2);
@@ -178,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //9
                 case R.id.button_9:
-                    ArrayList<String> objectnum_9 = setNumber(InputString, "9", real_input, warning_info);
+                    ArrayList<String> objectnum_9 = setOperand(InputString, "9", real_input, warning_info);
                     real_input = objectnum_9.get(0);
                     InputString = objectnum_9.get(1);
                     warning_info = objectnum_9.get(2);
@@ -187,17 +182,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //0
                 case R.id.button_10:
-                    ArrayList<String> objectnum_0 = setNumber(InputString, "0", real_input, warning_info);
+                    ArrayList<String> objectnum_0 = setOperand(InputString, "0", real_input, warning_info);
                     real_input = objectnum_0.get(0);
                     InputString = objectnum_0.get(1);
                     warning_info = objectnum_0.get(2);
                     inputText.setText(InputString);
                     symbolView.setText(warning_info);
                     break;
-                //键入加号
+                //input '+'
                 case R.id.button_11:
-//                    InputString = InputString +"+";
-                    ArrayList<String> objectadd = setSym(InputString, "+", real_input, warning_info);
+                    ArrayList<String> objectadd = setOperator(InputString, "+", real_input, warning_info);
                     real_input = objectadd.get(0);
                     InputString = objectadd.get(1);
                     warning_info = objectadd.get(2);
@@ -205,26 +199,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //键入乘号
+                //input '*'
                 case R.id.button_12:
-//                    InputString = InputString +"*";
-                    ArrayList<String> objectmulti = setSym(InputString, "*", real_input, warning_info);
+                    ArrayList<String> objectmulti = setOperator(InputString, "*", real_input, warning_info);
                     real_input = objectmulti.get(0);
                     InputString = objectmulti.get(1);
                     warning_info = objectmulti.get(2);
                     inputText.setText(InputString);
                     symbolView.setText(warning_info);
                     break;
-                //键入左括号
+                //input '('
                 case R.id.button_13:
-//                    InputString = InputString +"(";
                     warning_info = init_String;
                     if(support.checkInit(InputString)){
                         InputString = "(";
                         real_input = "(";
                     }else if(support.checkPoint(InputString)) {
-                    //拒绝键入
-                        Log.d("Main","reject input");
+                        Log.d("set LBracket","reject input");
                     }else if(support.checkLastSym(InputString)){
                         InputString = InputString +"(";
                         real_input = real_input + "(";
@@ -237,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     inputText.setText(InputString);
                     break;
 
-                //删除
+                //delete
                 case R.id.button_14:
                     warning_info = init_String;
                     StringBuilder deltempmstr = new StringBuilder();
@@ -260,34 +251,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //清空
+                //clear
                 case R.id.button_15:
                     InputString = init_Value;
                     real_input = init_Value;
                     warning_info = init_String;
-
                     symbolView.setText(null);
                     inputTextView.setText(null);
-
                     resultView.setText(null);
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //键入减号
+                //input '-'
                 case R.id.button_16:
-//                    InputString = InputString +"-";
-
-                    ArrayList<String> objectsub = setSym(InputString, "-", real_input, warning_info);
+                    ArrayList<String> objectsub = setOperator(InputString, "-", real_input, warning_info);
                     real_input = objectsub.get(0);
                     InputString = objectsub.get(1);
                     warning_info = objectsub.get(2);
                     inputText.setText(InputString);
                     symbolView.setText(warning_info);
                     break;
-                //键入除号
+                //input '/'
                 case R.id.button_17:
-//                    InputString = InputString +"/";
-                    ArrayList<String> objectdiv = setSym(InputString, "/", real_input, warning_info);
+                    ArrayList<String> objectdiv = setOperator(InputString, "/", real_input, warning_info);
 
                     real_input = objectdiv.get(0);
                     InputString = objectdiv.get(1);
@@ -296,13 +282,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //键入右括号
+                //input ')'
                 case R.id.button_18:
-//                    InputString = InputString +")";
                     warning_info = init_String;
-                    if(support.checkInit(InputString) || support.checkPoint(InputString) || support.checkRBracket(InputString)) {
-                    //拒绝键入
-                        Log.d("Main","reject input");
+                    if(support.checkInit(InputString) || support.checkPoint(InputString) || support.checkLBracket(InputString)) {
+                        Log.d("set RBracket","reject input");
                     }else if(support.checkLastSym(InputString)){
                         warning_info = "WARNING:缺少右操作数";
                         if(support.checkaddsub(InputString)){
@@ -319,40 +303,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //键入小数点
+                //input '.'
                 case R.id.button_19:
                     warning_info = init_String;
-
                     if(support.checkPoint(InputString)||support.checksym(InputString)==-2){
-                        Log.d("aaa","lose");
+                        Log.d("set point","lose");
                     }else if(support.checkLastNum(InputString)){
                         InputString = InputString + ".";
                         real_input = real_input + ".";
-                        Log.d("aaa","getin");
+                        Log.d("set point","getin");
                     }
-                    Log.d("aaa", InputString);
-                    Log.d("aaa", real_input);
-
+                    Log.d("set point", InputString);
+                    Log.d("set point", real_input);
 
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-
+                //nav to page2
                 case R.id.chip_topg2:
+                    Log.d("Main", "nav to page2");
                     Intent intent = new Intent(MainActivity.this,SecodMainActivity.class);
                     startActivity(intent);
                     finish();
                     break;
-
+                //input = ,start calculate
                 case R.id.button_20:
                     warning_info = init_String;
                     if (support.checkLastSym(InputString) || support.checkPoint(InputString)) {
                         InputString = InputString.substring(0, InputString.length() - 1);
                         real_input = real_input.substring(0, real_input.length() - 1);
                     }
-
-//                    Log.d("aaa", InputString);
-//                    Log.d("aaa", realinput);
 
                     InputString = support.addRBracket(InputString);
                     real_input = support.addRBracket(real_input);
@@ -366,16 +346,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         symbolView.setText(Calculate_Symbol);
                         inputTextView.setText(InputString);
 
-                        Log.d("aaa", InputString);
-                        Log.d("aaa", real_input);
+                        Log.d("Main", InputString);
+                        Log.d("Main", real_input);
 
-                        ResultString = new JNI().callcalcu(real_input);
+                        ResultString = new JNI().callCalcu(real_input);
 
                         if (support.judgeContainsStr(ResultString)) {
                             double value = Double.parseDouble(ResultString);
                             DecimalFormat decimalFormat = new DecimalFormat("###################.#######");
                             ResultString = decimalFormat.format(value);
                         }
+                        Log.d("Main", ResultString);
                         resultView.setText(ResultString);
 
 //                        if(support.judgeContains(ResultString)){
@@ -400,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else{
             warning_info = "WARNING: OUT OF SPACE";
             switch (v.getId()) {
-                //删除
+                //delete
                 case R.id.button_14:
                     warning_info = init_String;
                     StringBuilder deltempmstr = new StringBuilder();
@@ -423,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //清空
+                //clear
                 case R.id.button_15:
                     InputString = init_Value;
                     real_input = init_Value;
@@ -435,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
-                //键入等号，开始计算
+                //input '=',start calculate
                 case R.id.button_20:
                     warning_info = init_String;
                     if (support.checkLastSym(InputString) || support.checkPoint(InputString)) {
@@ -443,8 +424,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         real_input = real_input.substring(0, real_input.length() - 1);
                     }
 
-//                    Log.d("aaa", InputString);
-//                    Log.d("aaa", realinput);
+                    Log.d("Main", InputString);
+                    Log.d("Main", real_input);
 
                     InputString = support.addRBracket(InputString);
                     real_input = support.addRBracket(real_input);
@@ -457,27 +438,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Calculate_Symbol = "=";
                         symbolView.setText(Calculate_Symbol);
                         inputTextView.setText(InputString);
-
-                        Log.d("aaa", InputString);
-                        Log.d("aaa", real_input);
-
-                        ResultString = new JNI().callcalcu(real_input);
+                        ResultString = new JNI().callCalcu(real_input);
 
                         if (support.judgeContainsStr(ResultString)) {
                             double value = Double.parseDouble(ResultString);
                             DecimalFormat decimalFormat = new DecimalFormat("########################.#######");
                             ResultString = decimalFormat.format(value);
                         }
+                        Log.d("Main", ResultString);
                         resultView.setText(ResultString);
-
-//                        if(support.judgeContains(ResultString)){
-//                            resultView.setText(ResultString);
-//                        }else{
-//                            double value = Double.valueOf(ResultString);
-//                            DecimalFormat decimalFormat = new DecimalFormat("######################.#######");
-//                            ResultString = decimalFormat.format(value);
-//                            resultView.setText(ResultString);
-//                        }
                     }
 
                     InputString = init_Value;
@@ -490,66 +459,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //处理输入符号
-    public ArrayList<String> setSym(String mstr, String thesym, String rstr, String warninfo){
+    //settle operator input
+    public ArrayList<String> setOperator(String str_show, String operator, String str_hide, String warnInfo){
+        Log.d("Main", "press "+operator);
         warning_info = init_String;
-        if (support.checkLastSym(mstr) || support.checkPoint(mstr)){
-            mstr = mstr.substring(0,mstr.length()-1)+thesym;
-            rstr = mstr.substring(0,mstr.length()-1)+thesym;
-        }else if (support.checkLBracket(mstr)){
-            warninfo = "WARNING：缺少左操作数";
-            switch (thesym) {
+        if (support.checkLastSym(str_show) || support.checkPoint(str_show)){
+            str_show = str_show.substring(0,str_show.length()-1)+operator;
+            str_hide = str_show.substring(0,str_show.length()-1)+operator;
+        }else if (support.checkLBracket(str_show)){
+            warnInfo = "WARNING：缺少左操作数";
+            switch (operator) {
                 case "+":
-                    rstr = rstr + "0" + thesym;
-                    mstr = mstr + thesym;
+                    str_hide = str_hide + "0" + operator;
+                    str_show = str_show + operator;
                     break;
                 case "-":
-                    rstr = rstr + "0" + thesym;
-                    mstr = mstr + thesym;
-                    warninfo = init_String;
+                    str_hide = str_hide + "0" + operator;
+                    str_show = str_show + operator;
+                    warnInfo = init_String;
                     break;
                 case "*":
                 case "/":
-                    rstr = rstr + "1" + thesym;
-                    mstr = mstr + thesym;
+                    str_hide = str_hide + "1" + operator;
+                    str_show = str_show + operator;
                     break;
             }
         }else {
-            mstr = mstr + thesym;
-            rstr = rstr + thesym;
+            str_show = str_show + operator;
+            str_hide = str_hide + operator;
         }
-        ArrayList<String> setsymlist = new ArrayList<>();
-        setsymlist.add(rstr);
-        setsymlist.add(mstr);
-        setsymlist.add(warninfo);
-        return setsymlist;
+        ArrayList<String> setOperatorlist = new ArrayList<>();
+        setOperatorlist.add(str_hide);
+        setOperatorlist.add(str_show);
+        setOperatorlist.add(warnInfo);
+        return setOperatorlist;
     }
 
-    //处理输入数字
-    public ArrayList<String> setNumber(String mstr, String thenum, String rstr, String warninfo){
+    //settle operand input
+    public ArrayList<String> setOperand(String str_show, String operand, String str_hide, String warnInfo){
+        Log.d("Main", "press "+operand);
         warning_info = init_String;
-        if(support.checkInit(mstr)) {
-            mstr = thenum;
-            rstr = thenum;
-        }else if(support.checkRBracket(mstr)){
-            rstr = rstr + "*" + thenum;
-            mstr = mstr + thenum;
-            warninfo = "缺少操作符";
-        }else if(support.checkZero(mstr)){
-            //拒绝键入
+        if(support.checkInit(str_show)) {
+            str_show = operand;
+            str_hide = operand;
+        }else if(support.checkRBracket(str_show)){
+            str_hide = str_hide + "*" + operand;
+            str_show = str_show + operand;
+            warnInfo = "缺少操作符";
+        }else if(support.checkZero(str_show)){
             Log.d("Main","reject input");
         }else {
-            mstr = mstr + thenum;
-            rstr = rstr + thenum;
+            str_show = str_show + operand;
+            str_hide = str_hide + operand;
         }
-        ArrayList<String> setnumlist = new ArrayList<>();
-        setnumlist.add(rstr);
-        setnumlist.add(mstr);
-        setnumlist.add(warninfo);
-        return setnumlist;
+        ArrayList<String> setOperandlist = new ArrayList<>();
+        setOperandlist.add(str_hide);
+        setOperandlist.add(str_show);
+        setOperandlist.add(warnInfo);
+        return setOperandlist;
     }
 
-    //退出APP延迟
+    //exit app delay
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode == KeyEvent.KEYCODE_BACK){
             if((System.currentTimeMillis() - mExitTime)>2000){

@@ -33,13 +33,15 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 
 public class SecodMainActivity extends AppCompatActivity implements View.OnClickListener {
     String path;
     TextView tv;
-    float case_count = 0;
-    float case_right = 0;
-    float pass_rate ;
+    double case_count = 0;
+    double case_right = 0;
+    double pass_rate ;
     InputStreamReader importstream = null;
     BufferedReader reader =null;
     int storenum = 0;
@@ -86,16 +88,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                 datastore);
         caselistView.setAdapter(adapter_init);
 
-
         LitePal.getDatabase();
-
-//        order_list = new ArrayList<>();
-//        int len = Const.OrderInfo.orderOne.length;
-//        for (int i = 0; i < len ; i++) {
-//            Order order = new Order(Const.OrderInfo.orderOne[i][0],Const.OrderInfo.orderOne[i][1],Const.OrderInfo.orderOne[i][2],Const.OrderInfo.orderOne[i][3]);
-//            order_list.add(order);
-//        }
-
     }
 
 
@@ -104,14 +97,14 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
     @Override
     public   void  onClick(View v){
         switch (v.getId()) {
-            //切换到第一页面
+            //nav to page1
             case R.id.chip_topg1:
                 Intent intent_nav = new Intent(SecodMainActivity.this, MainActivity.class);
                 startActivity(intent_nav);
                 finish();
                 break;
 
-            //添加单个测试用例
+            //add single test_case
             case R.id.btn_addsingletest:
                 TestCase testdome_add = new TestCase();
                 formula_add=formula_add_edit.getText().toString();
@@ -119,29 +112,31 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                 expect_value=expect_value_edit.getText().toString();
                 Toast.makeText(SecodMainActivity.this, expect_value,Toast.LENGTH_SHORT).show();
 
+                if(formula_add.equals("")||expect_value.equals("")){
+                    break;
+                }
                 testdome_add.setFormulas(formula_add);
                 testdome_add.setExpectedValue(expect_value);
-                single_result = new JNI().callcalcu(formula_add);
+                single_result = new JNI().callCalcu(formula_add);
                 testdome_add.setRealResult(single_result);
                 testdome_add.setIspass(single_result.equals(expect_value));
                 testdome_add.save();
                 formula_add_edit.setText("");
                 expect_value_edit.setText("");
 
-                //读取数据库全部数据到集合
+                //database -> stringArray
                 List<TestCase>  setlistview = LitePal.findAll(TestCase.class);
                 int listsize=0;
                 int dbsize=setlistview.size();
                 Log.d("import", String.valueOf(dbsize));
-                //清空listview数组
+                //clear listview Array
                 while( storenum <= 20) {
                     datastore[storenum]=datastoreclear[storenum];
                     storenum++;
                 }
-                //从集合写数据到数组
                 do {
                     for (TestCase items: setlistview){
-                        datastore[listsize] = items.getId()+"\t\t算式"+items.getFormulas()+"\t\t期望值为"+items.getExpectedValue()+"\t\t结果为"+items.getRealResult();
+                        datastore[listsize] = "#\t\t算式"+items.getFormulas()+"\t\t期望值为"+items.getExpectedValue();
                         listsize ++;
                         Log.d("import", String.valueOf(listsize));
                     }
@@ -151,16 +146,20 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         datastore);
                 caselistView.setAdapter(adapter);
                 caselistView.setSelection(listsize-1);
+                case_count +=1;
+                View_case_count.setText(String.valueOf((int)case_count));
+                pass_rate = case_right/case_count;
+                nf.setMaximumFractionDigits(1);
+                View_pass_rate.setText(nf.format(pass_rate));
                 break;
-            //导入测试用例
-            case R.id.btn_import_cases:
+
 //                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //                intent.setType("file/*");
 //                intent.addCategory(Intent.CATEGORY_OPENABLE);
 //                startActivityForResult(intent, 1);
-                //清空数据库
+            //import testcase
+            case R.id.btn_import_cases:
                 LitePal.deleteAll(TestCase.class);
-                                //读取文件写入数据库
                 try {
                     importstream = new InputStreamReader(getAssets().open("casestore.csv"));
                     reader = new BufferedReader(importstream);
@@ -175,27 +174,22 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         Log.d("import",testdemo.getExpectedValue());
                         testdemo.save();
                     }
-
-                    //ArrayList<String> objectstore = get_Data(testdome,datastore);
-                    //ArrayList<String> testitems = new ArrayList<>();
-
-                    //读取数据库全部数据到集合
-                    List<TestCase>  setlistview_add = LitePal.findAll(TestCase.class);
+                    //database -> stringArray
+                    List<TestCase>  setListview_add = LitePal.findAll(TestCase.class);
                     int listsize_add=0;
-                    int dbsize_add=setlistview_add.size();
-                    Log.d("import", String.valueOf(dbsize_add));
-                    //清空listview数组
+                    int dbsize_add=setListview_add.size();
+//                    Log.d("import", String.valueOf(dbsize_add));
                     while( storenum <= 60) {
                         datastore[storenum]=datastoreclear[storenum];
                         storenum++;
                     }
-                    //从集合写数据到数组
                     do {
-                        for (TestCase items: setlistview_add){
-                            int outputindex = listsize_add + 1;
-                            datastore[listsize_add] = outputindex +"\t\t计算式"+items.getFormulas()+"\t\t期望值为"+items.getExpectedValue();
+                        for (TestCase items: setListview_add){
+                            int outputIndex = listsize_add + 1;
+                            datastore[listsize_add] = outputIndex +"\t\t计算式"+items.getFormulas()
+                                    +"\t\t期望值为"+items.getExpectedValue();
                             ++listsize_add;
-                            Log.d("import", String.valueOf(listsize_add));
+//                            Log.d("import", String.valueOf(listsize_add));
                         }
                     } while (listsize_add < dbsize_add);
                     ArrayAdapter<String> adapter_add = new ArrayAdapter<>(SecodMainActivity.this,
@@ -225,14 +219,16 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         Order order = new Order(String.valueOf(i++),items.getFormulas(),items.getExpectedValue(),items.getRealResult(),items.getIsPass());
                         order_list.add(order);
                     }
+                    Log.d("export", "start export");
                     FileExport.writeToExcel(SecodMainActivity.this,order_list,"orderTest");
+                    Log.d("export", "end export");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-            //将导入的测试用例开始测试
+            //start test
             case R.id.btn_start_testing:
-                //清空listview数组
+                //clear listview array
                 while( storenum <= 50) {
                     datastore[storenum]=datastoreclear[storenum];
                     storenum++;
@@ -242,23 +238,27 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                 caselistView.setAdapter(adapter_clear);
                 Toast.makeText(this, "开始用例批量测试", Toast.LENGTH_SHORT).show();
 
-                //测试并把结果写入数据库
+                //write to database
                 List<TestCase>  setlistview_test = LitePal.findAll(TestCase.class);
+                case_count = 0;
+                case_right = 0;
                 for (TestCase items: setlistview_test){
                     case_count ++;
                     TestCase testtoupdate = new TestCase();
-                    String tempresult = new JNI().callcalcu(items.getFormulas());
-                    if(tempresult.equals(items.getExpectedValue())){
-                        testtoupdate.setRealResult(tempresult);
+                    String tempresult = new JNI().callCalcu(items.getFormulas());
+                    double expvalue = Double.parseDouble(items.getExpectedValue());
+                    double realvalue = Double.parseDouble(tempresult);
+                    double diffr = abs(realvalue-expvalue);
+                    testtoupdate.setRealResult(tempresult);
+                    if( diffr <= 0.1){
                         testtoupdate.setIspass(true);
                         case_right ++;
-                        testtoupdate.updateAll("id=?",String.valueOf(items.getId()));
                     }else {
-                        testtoupdate.setRealResult(tempresult);
-                        testtoupdate.updateAll("id=?",String.valueOf(items.getId()));
+                        testtoupdate.setIspass(false);
                     }
+                    testtoupdate.updateAll("id=?",String.valueOf(items.getId()));
                 }
-                //再从数据库中取出并显示
+                //read from database
                 List<TestCase>  setlistview_result = LitePal.findAll(TestCase.class);
                 int listsize_add=0;
                 int dbsize_add=setlistview_result.size();
@@ -275,11 +275,17 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         android.R.layout.simple_expandable_list_item_1, datastore);
                 caselistView.setAdapter(adapter_result);
                 View_case_count.setText(String.valueOf((int)case_count));
-                pass_rate = case_right/case_count;
-                nf.setMaximumFractionDigits(1);
-                View_pass_rate.setText(nf.format(pass_rate));
+                    if(case_count!=0) {
+                        pass_rate = case_right / case_count;
+                        nf.setMaximumFractionDigits(1);
+                        View_pass_rate.setText(nf.format(pass_rate));
+                    }else {
+                        View_pass_rate.setText("0.0%");
+                    }
                 break;
-            case R.id.btn_table_clean: //清除页面显示的数据
+            //clear listview
+            case R.id.btn_table_clean:
+                LitePal.deleteAll(TestCase.class);
                 storenum = 0;
                 while( storenum <= 50) {
                     datastore[storenum]=datastoreclear[storenum];
@@ -289,14 +295,13 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                         android.R.layout.simple_expandable_list_item_1,
                         datastore);
                 caselistView.setAdapter(adapter_import);
+                View_case_count.setText("0");
+                View_pass_rate.setText("0.0%");
                 break;
             default:
                 break;
         }
     }
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -391,15 +396,6 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         return null;
     }
 
-    /**
-     * Get the value of the data column for this Uri. This is useful for
-     * MediaStore Uris, and other file-based ContentProviders.
-     * @param context       The context.
-     * @param uri           The Uri to query.
-     * @param selection     (Optional) Filter used in the query.
-     * @param selectionArgs (Optional) Selection arguments used in the query.
-     * @return The value of the _data column, which is typically a file path.
-     */
     public String getDataColumn(Context context, Uri uri, String selection,
                                 String[] selectionArgs) {
 
@@ -421,24 +417,14 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         return null;
     }
 
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is ExternalStorageProvider.
-     */
     public boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is DownloadsProvider.
-     */
+
     public boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is MediaProvider.
-     */
+
     public boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }

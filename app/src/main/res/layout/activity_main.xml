@@ -138,52 +138,35 @@
                     android:gravity="center"
                     android:paddingTop="12dp"
                     android:paddingBottom="6dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <Button
-                            android:id="@+id/button_1"
-                            style="@style/insidebtn"
-                            android:text="@string/button_num_1"
-                            />
-
-                        <Button
-                            android:id="@+id/button_2"
-                            style="@style/insidebtn"
-                            android:text="@string/button_num_2"/>
-
-                        <Button
-                            android:id="@+id/button_3"
-                            style="@style/insidebtn"
-                            android:text="@string/button_num_3" />
-
-                        <Button
-                            android:id="@+id/button_11"
-                            style="@style/insidebtn"
-                            android:text="@string/button_add" />
-
-                        <Button
-                            android:id="@+id/button_16"
-                            style="@style/insidebtn"
-                            android:text="@string/button_sub" />
-
-                        <Button
-                            android:id="@+id/button_13"
-                            style="@style/insidebtn"
-                            android:text="@string/button_bracket_l" />
-
-                        <Button
-                            android:id="@+id/button_18"
-                            style="@style/insidebtn"
-                            android:text="@string/button_bracket_r" />
-
-                    </LinearLayout>
-
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/button_1"
+                        style="@style/insidebtn"
+                        android:text="@string/button_num_1" />
+                    <Button
+                        android:id="@+id/button_2"
+                        style="@style/insidebtn"
+                        android:text="@string/button_num_2"/>
+                    <Button
+                        android:id="@+id/button_3"
+                        style="@style/insidebtn"
+                        android:text="@string/button_num_3" />
+                    <Button
+                        android:id="@+id/button_11"
+                        style="@style/insidebtn"
+                        android:text="@string/button_add" />
+                    <Button
+                        android:id="@+id/button_16"
+                        style="@style/insidebtn"
+                        android:text="@string/button_sub" />
+                    <Button
+                        android:id="@+id/button_13"
+                        style="@style/insidebtn"
+                        android:text="@string/button_bracket_l" />
+                    <Button
+                        android:id="@+id/button_18"
+                        style="@style/insidebtn"
+                        android:text="@string/button_bracket_r" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,47 +178,34 @@
                     android:paddingBottom="6dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <Button
-                            android:id="@+id/button_4"
-                            style="@style/insidebtn"
-                            android:text="@string/button_num_4" />
-
-                        <Button
-                            android:id="@+id/button_5"
-                            style="@style/insidebtn"
-                            android:text="@string/button_num_5" />
-
-                        <Button
-                            android:id="@+id/button_6"
-                            style="@style/insidebtn"
-                            android:text="@string/button_num_6" />
-
-                        <Button
-                            android:id="@+id/button_12"
-                            style="@style/insidebtn"
-                            android:text="@string/button_multi" />
-
-                        <Button
-                            android:id="@+id/button_17"
-                            style="@style/insidebtn"
-                            android:text="@string/button_div" />
-
-                        <Button
-                            android:id="@+id/button_14"
-                            style="@style/insidebtn"
-                            android:text="@string/button_del" />
-
-                        <Button
-                            android:id="@+id/button_15"
-                            style="@style/insidebtn"
-                            android:text="@string/button_clr" />
-                    </LinearLayout>
-
-
+                    <Button
+                        android:id="@+id/button_4"
+                        style="@style/insidebtn"
+                        android:text="@string/button_num_4" />
+                    <Button
+                        android:id="@+id/button_5"
+                        style="@style/insidebtn"
+                        android:text="@string/button_num_5" />
+                    <Button
+                        android:id="@+id/button_6"
+                        style="@style/insidebtn"
+                        android:text="@string/button_num_6" />
+                    <Button
+                        android:id="@+id/button_12"
+                        style="@style/insidebtn"
+                        android:text="@string/button_multi" />
+                    <Button
+                        android:id="@+id/button_17"
+                        style="@style/insidebtn"
+                        android:text="@string/button_div" />
+                    <Button
+                        android:id="@+id/button_14"
+                        style="@style/insidebtn"
+                        android:text="@string/button_del" />
+                    <Button
+                        android:id="@+id/button_15"
+                        style="@style/insidebtn"
+                        android:text="@string/button_clr" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -246,11 +216,6 @@
                     android:paddingTop="6dp"
                     android:paddingBottom="6dp"
                     android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
                         <Button
                             android:id="@+id/button_7"
                             style="@style/insidebtn"
@@ -284,9 +249,8 @@
                             android:layout_marginLeft="20dp"
                             android:background="@drawable/border_line_while"
                             android:text="@string/button_equal"
-                            android:textSize="36sp" />
-                    </LinearLayout>
-
+                            android:textSize="36sp"
+                            tools:ignore="ButtonStyle" />
                 </LinearLayout>
 
             </TableLayout>
@@ -298,7 +262,7 @@
     <View
         android:id="@+id/div_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="2dp"
         android:layout_above="@id/ly_tab_bar"/>
 
     <LinearLayout
@@ -321,7 +285,10 @@
             android:layout_marginRight="15dp"
             android:textSize="21sp"
             android:textColor="@color/dark_turquoise"
-            android:text="@string/chip_nav_pg1"/>
+            android:text="@string/chip_nav_pg1"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="15dp"
+            />
 
         <Button
             app:chipStartPadding="62dp"
@@ -335,7 +302,9 @@
             android:layout_marginRight="25dp"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="@string/chip_nav_pg2"/>
+            android:text="@string/chip_nav_pg2"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="25dp" />
 
     </LinearLayout>
 

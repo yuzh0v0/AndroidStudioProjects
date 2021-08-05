@@ -24,7 +24,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="2dp"
             android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
@@ -32,7 +32,7 @@
     <View
         android:id="@+id/div_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="2dp"
         android:layout_above="@id/ly_tab_bar"/>
 
     <FrameLayout
@@ -46,15 +46,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints,UselessParent">
 
             <Button
                 android:id="@+id/btn_addsingletest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/border_line_while"
                 android:text="@string/sample_add" />
 
             <LinearLayout
@@ -70,7 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:orientation="horizontal"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:baselineAligned="false">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -100,13 +101,13 @@
                             android:gravity="end"
                             android:paddingStart="2sp"
                             android:paddingLeft="2sp"
-                            android:paddingEnd="2sp"
-                            android:paddingRight="2sp"
+                            android:paddingEnd="20sp"
+                            android:paddingRight="20sp"
                             android:text="@string/single_test_input"
                             android:textAlignment="viewEnd"
                             android:textSize="21sp"
                             android:autofillHints="0000000"
-                            android:hint="@string/formula_add_sug"/>
+                            android:hint="@string/formula_add_sug" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -141,7 +142,9 @@
                             android:text="@string/single_test_result"
                             android:textAlignment="viewEnd"
                             android:textSize="21sp"
-                            />
+                            android:autofillHints="0"
+                            android:inputType="numberDecimal"
+                            tools:ignore="LabelFor" />
                     </LinearLayout>
 
 <!--                    <LinearLayout-->
@@ -252,7 +255,9 @@
                 android:layout_marginRight="15dp"
                 android:textSize="27sp"
 
-                style="?android:attr/buttonBarButtonStyle" />
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="15dp" />
 
             <Button
                 android:id="@+id/btn_table_clean"
@@ -263,7 +268,9 @@
                 android:layout_marginRight="25dp"
                 android:textSize="27sp"
                 android:text="@string/table_clean"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp" />
 
         </LinearLayout>
 
@@ -328,7 +335,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center"
-
                     android:textSize="18sp"
                     android:textAlignment="center"
                     android:text="@string/table_title_pass_rate" />
@@ -349,7 +355,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -365,7 +370,9 @@
                 android:layout_marginRight="15dp"
                 android:textSize="21sp"
                 android:textColor="@color/white"
-                android:text="@string/chip_nav_pg1"/>
+                android:text="@string/chip_nav_pg1"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="15dp" />
 
             <Button
                 app:chipStartPadding="62dp"
@@ -379,7 +386,9 @@
                 android:layout_marginRight="25dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_turquoise"
-                android:text="@string/chip_nav_pg2"/>
+                android:text="@string/chip_nav_pg2"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp" />
 
         </LinearLayout>
 
