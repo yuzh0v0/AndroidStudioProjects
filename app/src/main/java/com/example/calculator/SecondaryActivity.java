@@ -22,6 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.litepal.LitePal;
@@ -68,6 +70,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         Button chip_topg1 = findViewById(R.id.chip_topg1);
         Button btn_add_case = findViewById(R.id.btn_addsingletest);
         Button btn_import_cases = findViewById(R.id.btn_import_cases);
+        Button btn_import_default_cases = findViewById(R.id.btn_import_default_cases);
         Button btn_export_cases = findViewById(R.id.btn_export_cases);
         Button btn_start_testing = findViewById(R.id.btn_start_testing);
         Button btn_table_clean = findViewById(R.id.btn_table_clean);
@@ -79,6 +82,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         chip_topg1.setOnClickListener(this);
         btn_add_case.setOnClickListener(this);
         btn_import_cases.setOnClickListener(this);
+        btn_import_default_cases.setOnClickListener(this);
         btn_export_cases.setOnClickListener(this);
         btn_start_testing.setOnClickListener(this);
         btn_table_clean.setOnClickListener(this);
@@ -153,12 +157,16 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                 View_pass_rate.setText(nf.format(pass_rate));
                 break;
 
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("file/*");
-//                intent.addCategory(Intent.CATEGORY_OPENABLE);
-//                startActivityForResult(intent, 1);
+
             //import testcase
             case R.id.btn_import_cases:
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("./*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent, 1);
+
+                break;
+            case R.id.btn_import_default_cases:
                 LitePal.deleteAll(TestCase.class);
                 try {
                     importstream = new InputStreamReader(getAssets().open("casestore.csv"));
@@ -209,6 +217,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                 }
 
                 break;
+
             //导出测试完的用例到设备
             case R.id.btn_export_cases:
                 try {
@@ -226,6 +235,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 }
                 break;
+
             //start test
             case R.id.btn_start_testing:
                 //clear listview array
@@ -338,7 +348,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         return res;
     }
 
-    @SuppressLint("NewApi")
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -396,7 +406,7 @@ public class SecodMainActivity extends AppCompatActivity implements View.OnClick
         return null;
     }
 
-    public String getDataColumn(Context context, Uri uri, String selection,
+    public String getDataColumn(@NonNull Context context, Uri uri, String selection,
                                 String[] selectionArgs) {
 
         Cursor cursor = null;

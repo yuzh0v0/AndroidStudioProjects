@@ -48,15 +48,6 @@
             android:orientation="vertical"
             tools:ignore="MissingConstraints,UselessParent">
 
-            <Button
-                android:id="@+id/btn_addsingletest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/border_line_while"
-                android:text="@string/sample_add" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="86dp"
@@ -75,7 +66,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="5"
+                        android:layout_weight="21"
                         android:orientation="vertical">
                         <TextView
                             android:id="@+id/formula_add"
@@ -113,7 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="5">
                         <TextView
                             android:id="@+id/expect_value"
                             android:layout_width="match_parent"
@@ -137,16 +128,24 @@
                             android:paddingStart="2sp"
                             android:paddingLeft="2sp"
                             android:paddingEnd="2sp"
-
                             android:paddingRight="2sp"
                             android:text="@string/single_test_result"
                             android:textAlignment="viewEnd"
                             android:textSize="21sp"
                             android:autofillHints="0"
-                            android:inputType="numberDecimal"
                             tools:ignore="LabelFor" />
                     </LinearLayout>
-
+                    <Button
+                        android:id="@+id/btn_addsingletest"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="15sp"
+                        android:text="@string/sample_add" />
 <!--                    <LinearLayout-->
 <!--                        android:layout_width="0dp"-->
 <!--                        android:layout_height="match_parent"-->
@@ -181,31 +180,39 @@
 <!--                    </LinearLayout>-->
 
                 </LinearLayout>
-
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
                 <Button
-                    android:id="@+id/btn_import_cases"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btn_import_default_cases"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/batch_import_samples"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="24sp"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:text="@string/default_cases" />
+                <Button
+                    android:id="@+id/btn_import_cases"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/batch_import_samples"
+                    android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:textSize="24sp"
                     style="?android:attr/buttonBarButtonStyle" />
 
                 <Button
                     android:id="@+id/btn_export_cases"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
@@ -214,7 +221,6 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="8dp"
                     android:textSize="24sp"
-
                     style="?android:attr/buttonBarButtonStyle" />
 
             </LinearLayout>
@@ -224,9 +230,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-
-                />
+                android:layout_marginRight="8dp" />
 
         </LinearLayout>
 
