@@ -19,16 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     MainActivitySupport mainActivitySupport = new MainActivitySupport();
     private long mExitTime = 0;
-    String InputString ="";
-    String Calculate_Symbol = "";
-    String ResultString = "";
-    String init_Value = "0";
-    String init_String = "";
-    String real_input = "";
-    String warning_info = "";
+    private final String INIT_VALUE = "0";
+    String InputString, real_input, warning_info, ResultString, cal_Symbol;
 
     private TextView inputText,symbolView,inputTextView,resultView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         chip_totest.setOnClickListener(this);
-        InputString = init_Value;
+        InputString = INIT_VALUE;
         inputText.setText(InputString);
         real_input = InputString;
     }
@@ -96,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
+        String INIT_STRING = "";
         if(InputString.length()<=50){
             switch (v.getId()){
                 //input '1'
@@ -209,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //input '('
                 case R.id.button_13:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     if(mainActivitySupport.checkInit(InputString)){
                         InputString = "(";
                         real_input = "(";
@@ -229,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //delete
                 case R.id.button_14:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     StringBuilder deltempmstr = new StringBuilder();
                     String deltemprstr;
                     char[] cha = InputString.toCharArray();
@@ -244,17 +239,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         InputString = deltempmstr.toString();
                         real_input = deltemprstr;
                     } else {
-                        InputString = init_Value;
-                        real_input = init_Value;
+                        InputString = INIT_VALUE;
+                        real_input = INIT_VALUE;
                     }
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
                 //clear
                 case R.id.button_15:
-                    InputString = init_Value;
-                    real_input = init_Value;
-                    warning_info = init_String;
+                    InputString = INIT_VALUE;
+                    real_input = INIT_VALUE;
+                    warning_info = INIT_STRING;
                     symbolView.setText(null);
                     inputTextView.setText(null);
                     resultView.setText(null);
@@ -283,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //input ')'
                 case R.id.button_18:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     if(mainActivitySupport.checkInit(InputString) || mainActivitySupport.checkPoint(InputString) || mainActivitySupport.checkLBracket(InputString)) {
                         Log.d("set RBracket","reject input");
                     }else if(mainActivitySupport.checkLastSym(InputString)){
@@ -304,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //input '.'
                 case R.id.button_19:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     if(mainActivitySupport.checkPoint(InputString)|| mainActivitySupport.Last_operator(InputString)==-2){
                         Log.d("set point","lose");
                     }else if(mainActivitySupport.checkLastNum(InputString)){
@@ -327,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //input = ,start calculate
                 case R.id.button_20:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     if (mainActivitySupport.checkLastSym(InputString) || mainActivitySupport.checkPoint(InputString)) {
                         InputString = InputString.substring(0, InputString.length() - 1);
                         real_input = real_input.substring(0, real_input.length() - 1);
@@ -341,8 +336,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         symbolView.setText(warning_info);
 
                     } else {
-                        Calculate_Symbol = "=";
-                        symbolView.setText(Calculate_Symbol);
+                        cal_Symbol = "=";
+                        symbolView.setText(cal_Symbol);
                         inputTextView.setText(InputString);
 
                         Log.d("Main", InputString);
@@ -359,8 +354,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resultView.setText(ResultString);
                     }
 
-                    InputString = init_Value;
-                    real_input = init_Value;
+                    InputString = INIT_VALUE;
+                    real_input = INIT_VALUE;
                     inputText.setText(InputString);
                     break;
                 default:
@@ -373,7 +368,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (v.getId()) {
                 //delete
                 case R.id.button_14:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     StringBuilder deltempmstr = new StringBuilder();
                     String deltemprstr;
                     char[] cha = InputString.toCharArray();
@@ -388,17 +383,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         InputString = deltempmstr.toString();
                         real_input = deltemprstr;
                     } else {
-                        InputString = init_Value;
-                        real_input = init_Value;
+                        InputString = INIT_VALUE;
+                        real_input = INIT_VALUE;
                     }
                     symbolView.setText(warning_info);
                     inputText.setText(InputString);
                     break;
                 //clear
                 case R.id.button_15:
-                    InputString = init_Value;
-                    real_input = init_Value;
-                    warning_info = init_String;
+                    InputString = INIT_VALUE;
+                    real_input = INIT_VALUE;
+                    warning_info = INIT_STRING;
                     symbolView.setText(null);
                     inputTextView.setText(null);
 
@@ -408,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //input '=',start calculate
                 case R.id.button_20:
-                    warning_info = init_String;
+                    warning_info = INIT_STRING;
                     if (mainActivitySupport.checkLastSym(InputString) || mainActivitySupport.checkPoint(InputString)) {
                         InputString = InputString.substring(0, InputString.length() - 1);
                         real_input = real_input.substring(0, real_input.length() - 1);
@@ -424,8 +419,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         warning_info = "ERROR";
                         symbolView.setText(warning_info);
                     } else {
-                        Calculate_Symbol = "=";
-                        symbolView.setText(Calculate_Symbol);
+                        cal_Symbol = "=";
+                        symbolView.setText(cal_Symbol);
                         inputTextView.setText(InputString);
                         ResultString = new JNI().callCalcu(real_input);
                         //Format results
@@ -438,8 +433,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resultView.setText(ResultString);
                     }
 
-                    InputString = init_Value;
-                    real_input = init_Value;
+                    InputString = INIT_VALUE;
+                    real_input = INIT_VALUE;
                     inputText.setText(InputString);
                     break;
                 default:

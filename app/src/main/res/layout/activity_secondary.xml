@@ -62,11 +62,12 @@
                     android:layout_height="0dp"
                     android:orientation="horizontal"
                     android:layout_weight="1"
-                    android:baselineAligned="false">
+                    android:baselineAligned="false"
+                    tools:ignore="NestedWeights">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="21"
+                        android:layout_weight="22"
                         android:orientation="vertical">
                         <TextView
                             android:id="@+id/formula_add"
@@ -98,7 +99,8 @@
                             android:textAlignment="viewEnd"
                             android:textSize="21sp"
                             android:autofillHints="0000000"
-                            android:hint="@string/formula_add_sug" />
+                            android:hint="@string/formula_add_sug"
+                            tools:ignore="TextFields" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -133,7 +135,7 @@
                             android:textAlignment="viewEnd"
                             android:textSize="21sp"
                             android:autofillHints="0"
-                            tools:ignore="LabelFor" />
+                            tools:ignore="LabelFor,TextFields" />
                     </LinearLayout>
                     <Button
                         android:id="@+id/btn_addsingletest"
@@ -303,7 +305,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:id="@+id/tView8"
@@ -331,7 +334,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="NestedWeights">
+
 
                 <TextView
                     android:id="@+id/tView10"

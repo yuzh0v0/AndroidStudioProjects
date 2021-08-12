@@ -1,16 +1,13 @@
 package com.example.calculator;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-
 import android.content.Intent;
-
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.util.Log;
-
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -27,7 +24,6 @@ import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.lang.Math.abs;
 
 
@@ -37,9 +33,9 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
     private long mExitTime = 0;
     String path;
     TextView tv;
-    double case_count = 0;
-    double case_right = 0;
-    double pass_rate ;
+    double case_count;
+    double case_right;
+    double pass_rate;
     InputStreamReader importstream = null;
     BufferedReader reader =null;
     int storenum = 0;
@@ -56,13 +52,13 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
     public static String[] datastoreclear={"","","","","","","","","","","","","","",
             "","","","","","","","","","","", "","","","","","","","","","","","","",
             "","","", "", "","","","","","","","","","","","","","","","","","","","",""};
-    public ListView caselistView;
+    public ListView case_listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondary);
 
-        caselistView = findViewById(R.id.list_view);
+        case_listView = findViewById(R.id.list_view);
         Button chip_topg1 = findViewById(R.id.chip_topg1);
         Button btn_add_case = findViewById(R.id.btn_addsingletest);
         Button btn_import_cases = findViewById(R.id.btn_import_cases);
@@ -86,23 +82,22 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
         ArrayAdapter<String> adapter_init = new ArrayAdapter<>(SecondaryActivity.this,
                 android.R.layout.simple_expandable_list_item_1,
                 datastore);
-        caselistView.setAdapter(adapter_init);
+        case_listView.setAdapter(adapter_init);
 
         LitePal.getDatabase();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public   void  onClick(View v){
         switch (v.getId()) {
-            //nav to page1
-            case R.id.chip_topg1:
+            case R.id.chip_topg1: // nav to page1
                 Intent intent_nav = new Intent(SecondaryActivity.this, MainActivity.class);
                 startActivity(intent_nav);
                 finish();
                 break;
 
-            //add single test_case
-            case R.id.btn_addsingletest:
+            case R.id.btn_addsingletest: // add single test_case
                 TestCase testdome_add = new TestCase();
                 formula_add=formula_add_edit.getText().toString();
                 Toast.makeText(SecondaryActivity.this, formula_add,Toast.LENGTH_SHORT).show();
@@ -121,12 +116,12 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                 formula_add_edit.setText("");
                 expect_value_edit.setText("");
 
-                //database -> stringArray
+                // database -> stringArray
                 List<TestCase>  setlistview = LitePal.findAll(TestCase.class);
                 int listsize=0;
                 int dbsize=setlistview.size();
                 Log.d("import", String.valueOf(dbsize));
-                //clear listview Array
+                // clear listview Array
                 while( storenum <= 20) {
                     datastore[storenum]=datastoreclear[storenum];
                     storenum++;
@@ -141,8 +136,8 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1,
                         datastore);
-                caselistView.setAdapter(adapter);
-                caselistView.setSelection(listsize-1);
+                case_listView.setAdapter(adapter);
+                case_listView.setSelection(listsize-1);
                 case_count +=1;
                 View_case_count.setText(String.valueOf((int)case_count));
                 pass_rate = case_right/case_count;
@@ -150,15 +145,13 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                 View_pass_rate.setText(nf.format(pass_rate));
                 break;
 
-
-            //import testcase
-            case R.id.btn_import_cases:
+            case R.id.btn_import_cases: // import testcase
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("./*");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(intent, 1);
-
                 break;
+
             case R.id.btn_import_default_cases:
                 LitePal.deleteAll(TestCase.class);
                 try {
@@ -175,7 +168,7 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                         Log.d("import",testdemo.getExpectedValue());
                         testdemo.save();
                     }
-                    //database -> stringArray
+                    // database -> stringArray
                     List<TestCase>  setListview_add = LitePal.findAll(TestCase.class);
                     int listsize_add=0;
                     int dbsize_add=setListview_add.size();
@@ -196,7 +189,7 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                     ArrayAdapter<String> adapter_add = new ArrayAdapter<>(SecondaryActivity.this,
                             android.R.layout.simple_expandable_list_item_1,
                             datastore);
-                    caselistView.setAdapter(adapter_add);
+                    case_listView.setAdapter(adapter_add);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }finally{
@@ -208,7 +201,6 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                         }
                     }
                 }
-
                 break;
 
             case R.id.btn_export_cases: // export testcases
@@ -228,18 +220,18 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                 }
                 break;
 
-            case R.id.btn_start_testing: //start test
-                //clear listview array
+            case R.id.btn_start_testing: // start test
+                // clear listview array
                 while( storenum <= 50) {
                     datastore[storenum]=datastoreclear[storenum];
                     storenum++;
                 }
                 ArrayAdapter<String> adapter_clear = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1, datastore);
-                caselistView.setAdapter(adapter_clear);
+                case_listView.setAdapter(adapter_clear);
                 Toast.makeText(this, "开始用例批量测试", Toast.LENGTH_SHORT).show();
 
-                //write to database
+                // write to database
                 List<TestCase>  setlistview_test = LitePal.findAll(TestCase.class);
                 case_count = 0;
                 case_right = 0;
@@ -273,7 +265,7 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                 } while (listsize_add < dbsize_add);
                 ArrayAdapter<String> adapter_result = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1, datastore);
-                caselistView.setAdapter(adapter_result);
+                case_listView.setAdapter(adapter_result);
                 View_case_count.setText(String.valueOf((int)case_count));
                     if(case_count!=0) {
                         pass_rate = case_right / case_count;
@@ -294,7 +286,7 @@ public class SecondaryActivity extends AppCompatActivity implements View.OnClick
                 ArrayAdapter<String> adapter_import = new ArrayAdapter<>(SecondaryActivity.this,
                         android.R.layout.simple_expandable_list_item_1,
                         datastore);
-                caselistView.setAdapter(adapter_import);
+                case_listView.setAdapter(adapter_import);
                 View_case_count.setText("0");
                 View_pass_rate.setText("0.0%");
                 break;

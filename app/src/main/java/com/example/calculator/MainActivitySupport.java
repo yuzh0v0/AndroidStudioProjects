@@ -1,8 +1,7 @@
 package com.example.calculator;
 
 import android.util.Log;
-import android.view.KeyEvent;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class MainActivitySupport extends AppCompatActivity {
     
-    private final String init_String= "";
+    private final String INIT_STRING = "";
 
     //judge last input whether is operator + -
     public boolean checkaddsub(String str){
@@ -116,7 +115,7 @@ public class MainActivitySupport extends AppCompatActivity {
     //settle operator input
     public ArrayList<String> setOperator(String str_show, String operator, String str_hide){
         Log.d("Main", "press "+operator);
-        String warnInfo = init_String;
+        String warnInfo = INIT_STRING;
         if (checkLastSym(str_show) || checkPoint(str_show)){
             str_show = str_show.substring(0,str_show.length()-1)+operator;
             str_hide = str_show.substring(0,str_show.length()-1)+operator;
@@ -130,7 +129,7 @@ public class MainActivitySupport extends AppCompatActivity {
                 case "-":
                     str_hide = str_hide + "0" + operator;
                     str_show = str_show + operator;
-                    warnInfo = init_String;
+                    warnInfo = INIT_STRING;
                     break;
                 case "*":
                 case "/":
@@ -151,7 +150,7 @@ public class MainActivitySupport extends AppCompatActivity {
     //settle operand input
     public ArrayList<String> setOperand(String str_show, String operand, String str_hide){
         Log.d("Main", "press "+operand);
-        String warnInfo = init_String;
+        String warnInfo = INIT_STRING;
         if(checkInit(str_show)) {
             str_show = operand;
             str_hide = operand;

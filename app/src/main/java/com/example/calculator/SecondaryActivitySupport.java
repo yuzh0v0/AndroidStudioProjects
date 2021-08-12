@@ -16,9 +16,6 @@ import androidx.annotation.RequiresApi;
 public class SecondaryActivitySupport {
     private Context context;
 
-    public void transContext(Context context) {
-        this.context = context;
-    }
     public String getRealPathFromURI(Uri contentUri) {
         String res = null;
         String[] proj = { MediaStore.Images.Media.DATA };
